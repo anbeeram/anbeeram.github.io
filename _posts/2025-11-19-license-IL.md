@@ -1,44 +1,55 @@
 ---
 layout: page
 title: "Visualizing Illinois License Data"
+tags: [Illinois, Data Visualizitation, ]
+style: fill
+color: secondary
+description: This is a blog post to get you started.
 ---
 
 
-This project explores license data issued in the state of Illinois and presents two visualizations:  
-(1) a bar chart showing the most common license types, and  
-(2) a county-level choropleth map showing the geographic distribution of license counts.
-
 ---
 
-## 🔗 Data and Notebook
+## Data and Notebook
 
 - **[The Data](https://raw.githubusercontent.com/UIUC-iSchool-DataViz/is445_data/main/licenses_fall2022.csv)**  
-- **[The Analysis](https://github.com/anbeeram/anbeeram.github.io)**  
+- **[The Analysis](https://github.com/anbeeram/anbeeram.github.io/blob/main/assets/notebooks/Workbook.ipynb)**  
 
 ---
 
-# 📊 Visualization 1: Top 5 License Types in Illinois
+# 📊 Visualization 1:  Illinois Licenses by County
 
 <iframe src="/assets/charts/chart1_top_license_types.html" width="100%" height="450"></iframe>
 
 ### **Explanation**
-This bar chart displays the top five most common license types issued in Illinois. To create this visualization, the dataset was first filtered to include only rows where the `State` field equals `"IL"`. Then, the `License Type` column was aggregated using `value_counts()` to determine how many licenses existed within each category. A bar chart was chosen because it clearly compares categorical frequencies and makes it easy to recognize which license types appear more frequently. The x-axis encodes the categorical `License Type` field, while the y-axis represents the quantitative count. Color is also mapped to the license category, helping visually distinguish different types. Sorting the bars in descending order highlights the most common license types at a glance.
+
+This map shows how many licenses are located in each Illinois county by using different shades of color and displays the exact count when you hover over a county. Counties with darker shades have more licenses than counties with lighter shades.
+
+To build this map, I grouped all the Illinois license records by county and calculated the total number of licenses in each one. Then I matched each county name to its official FIPS code (a five-digit identification number) by using information from a TopoJSON file, since the mapping tool requires FIPS codes to display data on county shapes. 
+
+Once I added the correct FIPS codes to my summary, I merged the license counts with the county boundaries so the map could show the right color for each region.
 
 ---
 
-# 🗺️ Visualization 2: Illinois Licenses by County
+# 📊 Visualization 2: Top 5 License Types in Illinois by County
 
 <iframe src="/assets/charts/chart2_illinois_map.html" width="100%" height="650"></iframe>
 
 ### **Explanation**
-The second visualization is a chloropleth map representing the number of licenses issued across Illinois counties. To prepare for this visualization, Illinois records were grouped by `County` to compute total license counts. Next, county names were matched with their corresponding five-digit FIPS codes from the official TopoJSON file provided through `vega_datasets`. Using FIPS as the key allowed us to join the license data with the county geometries. The map uses `geoshape` marks with a Mercator projection and a sequential blue color scale to represent variation in license counts. Counties with higher counts appear in darker shades. A separate outline layer ensures that *all* counties—including those with zero or missing data—are clearly visible through black borders.
 
+This chart displays the five most common types of licenses found in Illinois by counting how many licenses belong to each category. It makes it simple to see which license types are most popular in the data. It makes it simple to see which license types are most popular in a given county.
+
+Each bar has its own color to make the different license types easy to tell apart. The colors help us distinguish between categories but do not represent any numeric information on their own.
+
+Before creating this plot, I cleaned the dataset by removing null values in the key fields, then filtered the data to include only records where the state was “IL,” since the goal was to focus only on Illinois licenses. 
+
+There's a dropdown menu at the top where you pick a county. When you choose one, the chart updates to show only that county's data.
+To make this work, I created a parameter called county_param that stores whichever county you selected. Then I used a transform_filter to keep only the rows where the county matches what you picked. After that, the chart ranks the license types in that county and shows you the top five in the bar graph.
 ---
 
 # Interactivity
 
-Interactivity enhances both clarity and exploration in this project. The county map includes hover tooltips that display the county name and exact number of licenses, allowing viewers to explore specific regions without cluttering the visualization. Additionally, the use of separate outline and fill layers ensures meaningful comparison across counties, even when some have no associated data. For deeper analysis, the project also includes an interactive dropdown (in the notebook) that allows the user to select any Illinois county and view the top five license types for that county. This parameter-driven interactivity makes the visualizations more engaging and supports county-level comparisons that would be difficult to see in a static plot.
-
+The map includes hover tooltips that let users explore the data without making the visualization look cluttered or overwhelming. Additionally, a dropdown menu in the analysis tool allows users to select any county they want and immediately see which license types are most common there. These features make the analysis feel more helpful for users to focus on the specific information.
 ---
 
 # Files Included
