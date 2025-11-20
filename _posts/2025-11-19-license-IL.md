@@ -19,7 +19,7 @@ description: This is a blog post to get you started.
 
 # 📊 Visualization 1:  Illinois Licenses by County
 
-<iframe src="/assets/charts/chart1_top_license_types.html" width="100%" height="450"></iframe>
+<iframe src="/assets/charts/chart1_top_license_types.html" width="100%" height="650"></iframe>
 
 ### **Explanation**
 
@@ -50,6 +50,7 @@ To make this work, I created a parameter called county_param that stores whichev
 # Interactivity
 
 The map includes hover tooltips that let users explore the data without making the visualization look cluttered or overwhelming. Additionally, a dropdown menu in the analysis tool allows users to select any county they want and immediately see which license types are most common there. These features make the analysis feel more helpful for users to focus on the specific information.
+
 ---
 
 # Files Included
