@@ -1,7 +1,6 @@
 ---
-layout: page
 title: "Visualizing Illinois License Data"
-tags: [Illinois, Data Visualizitation, ]
+tags: [Illinois, Data Visualizitation]
 style: fill
 color: secondary
 description: This is a blog post to get you started.
